@@ -34,8 +34,10 @@ export class Dogs extends Module {
 
         const img = document.createElement("img");
         img.src = data.message;
-        img.style.margin = "25%";
+        img.style.margin = "5%";
         img.style.border = "5px solid burlywood";
+        img.style.maxWidth = "600px";
+        img.style.maxHeight = "600px";
         document.body.append(moduleContainer);
         imgContainer.append(img);
       } catch (err) {
