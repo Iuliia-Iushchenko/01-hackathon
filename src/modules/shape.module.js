@@ -15,13 +15,15 @@ export class ShapeModule extends Module {
       otherModule.remove();
     }
     let moduleContainer = document.createElement("div");
-    moduleContainer.className = ".module";
+    moduleContainer.className = "module";
+    moduleContainer.style.height = "100vh";
+    moduleContainer.style.width = "100wh";
     //-------------------------------------------
     const body = document.querySelector("body");
     const circle = document.createElement("div");
     const sizeWidth = random(10, 200);
     const sizeHeight = random(10, 200);
-    const { width, height } = moduleContainer.getBoundingClientRect();
+    const { width, height } = body.getBoundingClientRect();
     const x = random(0, width - sizeHeight);
     const y = random(0, height - sizeHeight);
 
