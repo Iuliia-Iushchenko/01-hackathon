@@ -4,6 +4,7 @@ import { BackgroundModule } from './modules/background.module'
 import { ShapeModule } from './modules/shape.module'
 import { Sound } from './modules/sound.module'
 import { ClicksModule } from './modules/clicks.module'
+import { Dogs } from './modules/dogs.module'
 
 export class ContextMenu extends Menu {
   open() {
@@ -44,6 +45,9 @@ export class ContextMenu extends Menu {
     const clicksModule = new ClicksModule()
     menu.insertAdjacentHTML('beforeend', clicksModule.toHTML())
 
+    const dogs = new Dogs()
+    menu.insertAdjacentHTML('beforeend', dogs.toHTML())
+
     // Запуск модуля
 
     menu.addEventListener('click', (e) => {
@@ -53,6 +57,7 @@ export class ContextMenu extends Menu {
       target.dataset.type === 'shape' ? shapeModule.trigger() : false
       target.dataset.type === 'audio' ? sound.trigger() : false
       target.dataset.type === 'click' ? clicksModule.trigger() : false
+      target.dataset.type === 'dogs' ? dogs.trigger() : false
     })
   }
 }
