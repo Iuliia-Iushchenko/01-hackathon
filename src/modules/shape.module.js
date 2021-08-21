@@ -1,12 +1,24 @@
 import { Module } from "../core/module";
-import { random } from "../units";
+import { random } from "../utils";
 
 export class ShapeModule extends Module {
   constructor() {
-    super("shape", "Случайный фигура");
+    super("shape", "Случайная фигура");
   }
 
   trigger() {
+    /* Создаем контейнер для модуля, 
+    удаляем результаты работы лишних моделей
+    */
+    let otherModule = document.querySelector(".module");
+    if (otherModule) {
+      otherModule.remove();
+    }
+    let moduleContainer = document.createElement("div");
+    moduleContainer.className = "module";
+    moduleContainer.style.height = "100vh";
+    moduleContainer.style.width = "100wh";
+    //-------------------------------------------
     const body = document.querySelector("body");
     const circle = document.createElement("div");
     const sizeWidth = random(10, 200);
@@ -27,15 +39,12 @@ export class ShapeModule extends Module {
     circle.style.background = color;
     circle.style.boxShadow = `0 0 2px ${color}, 0 0 10px ${color}`;
 
-    body.append(circle);
+    body.append(moduleContainer);
+    moduleContainer.append(circle);
     let i = 0;
     setInterval(() => {
       circle.style.transform = `rotate(${i}deg)`;
       i++;
     }, 20);
-
-    setTimeout(() => {
-      circle.remove();
-    }, 5000);
   }
 }
