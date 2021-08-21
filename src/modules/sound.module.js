@@ -15,6 +15,17 @@ export class Sound extends Module {
   }
 
   trigger() {
+    /* Создаем контейнер для модуля, 
+    удаляем результаты работы лишних моделей
+    */
+    let otherModule = document.querySelector(".module");
+    if (otherModule) {
+      otherModule.remove();
+    }
+    let moduleContainer = document.createElement("div");
+    moduleContainer.className = ".module";
+    //-------------------------------------------
+
     let currentAudio = document.querySelector("#currentAudio");
     if (currentAudio) {
       currentAudio.remove();
@@ -26,7 +37,8 @@ export class Sound extends Module {
     let audio = new Audio(soundUrl);
     let body = document.querySelector("body");
     audio.id = "currentAudio";
-    body.append(audio);
+    body.append(moduleContainer);
+    moduleContainer.append(audio);
     audio.play();
   }
 }
