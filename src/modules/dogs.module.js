@@ -19,9 +19,6 @@ export class Dogs extends Module {
 
     let url = "https://dog.ceo/api/breeds/image/random";
 
-    let moduleContainer = document.createElement("div");
-    moduleContainer.className = "module";
-
     async function fetchDogs() {
       try {
         const response = await fetch(url, {
@@ -45,5 +42,6 @@ export class Dogs extends Module {
         console.log(err);
       }
     }
+    fetchDogs();
   }
 }
