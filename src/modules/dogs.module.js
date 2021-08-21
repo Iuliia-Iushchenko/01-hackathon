@@ -14,10 +14,13 @@ export class Dogs extends Module {
       otherModule.remove();
     }
     let moduleContainer = document.createElement("div");
-    moduleContainer.className = ".module";
+    moduleContainer.className = "module";
     //-------------------------------------------
 
     let url = "https://dog.ceo/api/breeds/image/random";
+
+    let moduleContainer = document.createElement("div");
+    moduleContainer.className = "module";
 
     async function fetchDogs() {
       try {
@@ -36,6 +39,7 @@ export class Dogs extends Module {
         img.src = data.message;
         img.style.margin = "25%";
         img.style.border = "5px solid burlywood";
+        document.body.append(moduleContainer);
         imgContainer.append(img);
       } catch (err) {
         console.log(err);
