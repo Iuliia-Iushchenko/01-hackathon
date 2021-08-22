@@ -7,13 +7,7 @@ export class ClicksModule extends Module {
   }
 
   trigger() {
-    const screen = document.querySelector(".screen");
-    if (screen) {
-      screen.remove();
-    }
-
     this.createElement();
-
     const shape = document.querySelector(".click__shape");
     const timeValue = document.querySelector("#time");
 
@@ -80,7 +74,6 @@ export class ClicksModule extends Module {
     shape.textContent = "Click me";
 
     timer.append(timerSpan);
-    document.body.append(timer);
     screen.append(timer, shape);
     document.body.append(screen);
   }
