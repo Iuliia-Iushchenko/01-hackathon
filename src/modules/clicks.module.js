@@ -90,12 +90,12 @@ export class ClicksModule extends Module {
     timerSpan.dataset.time = `${second1}${second2}`;
 
     const shape = document.createElement("div");
+    shape.style.userSelect = "none";
+    shape.style.cursor = "pointer";
     shape.className = "click__shape";
-    shape.textContent = "";
     shape.textContent = "Click me";
 
     timer.append(timerSpan);
-    document.body.append(timer);
     moduleContainer.append(timer, shape);
     document.body.append(moduleContainer);
   }
