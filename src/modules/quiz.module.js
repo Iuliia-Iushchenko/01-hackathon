@@ -63,8 +63,8 @@ export class QuizModule extends Module {
       otherModule.remove();
     }
     let moduleContainer = document.createElement("div");
-    moduleContainer.className = "module";
-    moduleContainer.classList.add("screen");
+    moduleContainer.className = "module screen fix";
+
 
     const quizContainer = document.createElement("div");
     quizContainer.className = "quizContainer";
