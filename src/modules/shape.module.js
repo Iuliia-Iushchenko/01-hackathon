@@ -25,7 +25,7 @@ export class ShapeModule extends Module {
     const sizeHeight = random(10, 200);
     const { width, height } = body.getBoundingClientRect();
     const x = random(0, width - sizeHeight);
-    const y = random(0, height - sizeHeight);
+    const y = random(0, height - sizeWidth);
 
     circle.style.position = "absolute";
     circle.classList.add("circle");
