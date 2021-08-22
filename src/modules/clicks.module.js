@@ -7,6 +7,10 @@ export class ClicksModule extends Module {
   }
 
   trigger() {
+    let otherModule = document.querySelector(".module");
+    if (otherModule) {
+      otherModule.remove();
+    }
     this.createElement();
     const shape = document.querySelector(".click__shape");
     const timeValue = document.querySelector("#time");
@@ -57,8 +61,18 @@ export class ClicksModule extends Module {
   }
 
   createElement() {
-    const screen = document.createElement("div");
-    screen.className = "screen";
+    /* Создаем контейнер для модуля, 
+    удаляем результаты работы лишних моделей
+    */
+    let otherModule = document.querySelector(".module");
+    if (otherModule) {
+      otherModule.remove();
+    }
+    let moduleContainer = document.createElement("div");
+    moduleContainer.className = "module";
+    //-------------------------------------------
+
+    moduleContainer.classList.add("screen");
 
     const timer = document.createElement("h3");
     timer.textContent = "Осталось ";
@@ -74,7 +88,8 @@ export class ClicksModule extends Module {
     shape.textContent = "Click me";
 
     timer.append(timerSpan);
-    screen.append(timer, shape);
-    document.body.append(screen);
+    document.body.append(timer);
+    moduleContainer.append(timer, shape);
+    document.body.append(moduleContainer);
   }
 }

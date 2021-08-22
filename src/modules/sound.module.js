@@ -23,7 +23,7 @@ export class Sound extends Module {
       otherModule.remove();
     }
     let moduleContainer = document.createElement("div");
-    moduleContainer.className = ".module";
+    moduleContainer.className = "module";
     //-------------------------------------------
 
     let currentAudio = document.querySelector("#currentAudio");
@@ -34,6 +34,13 @@ export class Sound extends Module {
   }
 
   playSound(soundUrl) {
+    let otherModule = document.querySelector(".module");
+    if (otherModule) {
+      otherModule.remove();
+    }
+    let moduleContainer = document.createElement("div");
+    moduleContainer.className = "module";
+
     let audio = new Audio(soundUrl);
     let body = document.querySelector("body");
     audio.id = "currentAudio";
