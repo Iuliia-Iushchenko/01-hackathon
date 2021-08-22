@@ -16,7 +16,7 @@ export class ClicksModule extends Module {
     const timeValue = document.querySelector("#time");
 
     let score = 0;
-    let intervalID;
+    let intervalID = null;
     let time = parseInt(timeValue.getAttribute("data-time"));
     start(time);
 
