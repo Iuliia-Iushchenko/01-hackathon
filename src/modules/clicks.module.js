@@ -7,39 +7,40 @@ export class ClicksModule extends Module {
   }
 
   trigger() {
-    const screen = document.querySelector(".screen");
-    if (screen) {
-      screen.remove();
+    let otherModule = document.querySelector(".module");
+    if (otherModule) {
+      otherModule.remove();
     }
-
     this.createElement();
-
     const shape = document.querySelector(".click__shape");
-    const timeValue = document.querySelector("#time");
+    const timeValue = document.querySelector(".time");
 
     let score = 0;
+    let intervalID = null;
     let time = parseInt(timeValue.getAttribute("data-time"));
-    console.log(time);
     start(time);
 
     shape.addEventListener("click", clickCounter);
 
     function clickCounter(event) {
+      event.preventDefault();
       if (event.target.classList.contains("click__shape")) {
         score += 1;
-        console.log(score);
       }
     }
 
     function start(time) {
-      setInterval(decreaseTime, 1000);
+      intervalID = setInterval(decreaseTime, 1000);
       timer(time);
     }
 
     function timer(value) {
-      let timeEl = document.querySelector("#time");
-      timeEl.innerHTML = `00:${value}`;
-      console.log(value);
+      let timeEl = document.querySelector(".time");
+      if (timeEl === null) {
+        clearInterval(intervalID);
+      } else {
+        timeEl.innerHTML = `00:${value}`;
+      }
     }
 
     function decreaseTime() {
@@ -47,7 +48,6 @@ export class ClicksModule extends Module {
         finish(score);
       } else {
         let current = --time;
-        console.log("current", current);
         if (current < 10) {
           current = `0${current}`;
         }
@@ -56,6 +56,7 @@ export class ClicksModule extends Module {
     }
 
     function finish(score) {
+      clearInterval(intervalID);
       const shape = document.querySelector(".click__shape");
       shape.textContent = `Счет: ${score}`;
       shape.removeEventListener("click", clickCounter);
@@ -63,13 +64,24 @@ export class ClicksModule extends Module {
   }
 
   createElement() {
-    const screen = document.createElement("div");
-    screen.className = "screen";
+    /* Создаем контейнер для модуля, 
+    удаляем результаты работы лишних моделей
+    */
+    let otherModule = document.querySelector(".module");
+    if (otherModule) {
+      otherModule.remove();
+    }
+    let moduleContainer = document.createElement("div");
+    moduleContainer.className = "module";
+    //-------------------------------------------
+
+    moduleContainer.classList.add("screen");
 
     const timer = document.createElement("h3");
+    timer.className = "timerText";
     timer.textContent = "Осталось ";
     const timerSpan = document.createElement("span");
-    timerSpan.id = "time";
+    timerSpan.className = "time";
     let second1 = random(1, 2);
     let second2 = random(0, 9);
     timerSpan.textContent = `00:${second1}${second2}`;
@@ -77,11 +89,12 @@ export class ClicksModule extends Module {
 
     const shape = document.createElement("div");
     shape.className = "click__shape";
+    shape.textContent = "";
     shape.textContent = "Click me";
 
     timer.append(timerSpan);
     document.body.append(timer);
-    screen.append(timer, shape);
-    document.body.append(screen);
+    moduleContainer.append(timer, shape);
+    document.body.append(moduleContainer);
   }
 }

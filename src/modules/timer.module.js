@@ -39,19 +39,26 @@ export class TimerModule extends Module {
 
       button.addEventListener("click", function () {
         let valueOfTime = input.value;
+        input.value = "";
+        button.setAttribute("disabled", "disabled");
         let timeMinut = parseInt(valueOfTime) * 60;
         let timer = setInterval(function () {
           let seconds = timeMinut % 60;
           let minuts = (timeMinut / 60) % 60;
           let hours = (timeMinut / 60 / 60) % 60;
-          let strTimer = `${Math.trunc(hours)}:${Math.trunc(
-            minuts
-          )}:${seconds}`;
+          let strTimer = `${
+            Math.trunc(hours) < 10 ? `0${Math.trunc(hours)}` : Math.trunc(hours)
+          }:${
+            Math.trunc(minuts) < 10
+              ? `0${Math.trunc(minuts)}`
+              : Math.trunc(minuts)
+          }:${seconds < 10 ? `0${seconds}` : seconds}`;
           h1.textContent = strTimer;
           timeMinut--;
           if (timeMinut <= 0) {
             clearInterval(timer);
             h1.textContent = "Время истекло";
+            button.removeAttribute("disabled");
           }
         }, 1000);
       });

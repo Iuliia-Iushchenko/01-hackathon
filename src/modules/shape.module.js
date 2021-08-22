@@ -16,9 +16,9 @@ export class ShapeModule extends Module {
     }
     let moduleContainer = document.createElement("div");
     moduleContainer.className = "module";
-    moduleContainer.style.height = "100vh";
-    moduleContainer.style.width = "100wh";
     //-------------------------------------------
+
+    moduleContainer.classList.add("screen");
     const body = document.querySelector("body");
     const circle = document.createElement("div");
     const sizeWidth = random(10, 200);
