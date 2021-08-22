@@ -7,6 +7,6 @@ export class BackgroundModule extends Module {
     }
     trigger() {
         const background = document.querySelector('body');
-        background.style.backgroundColor = `RGB(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`
+        background.style.background = `RGB(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)})`
     }
 }
