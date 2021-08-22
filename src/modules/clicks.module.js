@@ -16,28 +16,31 @@ export class ClicksModule extends Module {
     const timeValue = document.querySelector("#time");
 
     let score = 0;
+    let intervalID;
     let time = parseInt(timeValue.getAttribute("data-time"));
-    console.log(time);
     start(time);
 
     shape.addEventListener("click", clickCounter);
 
     function clickCounter(event) {
+      event.preventDefault();
       if (event.target.classList.contains("click__shape")) {
         score += 1;
-        console.log(score);
       }
     }
 
     function start(time) {
-      setInterval(decreaseTime, 1000);
+      intervalID = setInterval(decreaseTime, 1000);
       timer(time);
     }
 
     function timer(value) {
       let timeEl = document.querySelector("#time");
-      timeEl.innerHTML = `00:${value}`;
-      console.log(value);
+      if (timeEl === null) {
+        clearInterval(intervalID);
+      } else {
+        timeEl.innerHTML = `00:${value}`;
+      }
     }
 
     function decreaseTime() {
@@ -45,7 +48,6 @@ export class ClicksModule extends Module {
         finish(score);
       } else {
         let current = --time;
-        console.log("current", current);
         if (current < 10) {
           current = `0${current}`;
         }
@@ -54,6 +56,7 @@ export class ClicksModule extends Module {
     }
 
     function finish(score) {
+      clearInterval(intervalID);
       const shape = document.querySelector(".click__shape");
       shape.textContent = `Счет: ${score}`;
       shape.removeEventListener("click", clickCounter);
@@ -75,6 +78,7 @@ export class ClicksModule extends Module {
     moduleContainer.classList.add("screen");
 
     const timer = document.createElement("h3");
+    timer.className = "timerText";
     timer.textContent = "Осталось ";
     const timerSpan = document.createElement("span");
     timerSpan.id = "time";
@@ -85,6 +89,7 @@ export class ClicksModule extends Module {
 
     const shape = document.createElement("div");
     shape.className = "click__shape";
+    shape.textContent = "";
     shape.textContent = "Click me";
 
     timer.append(timerSpan);
