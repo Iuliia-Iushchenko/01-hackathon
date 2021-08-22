@@ -1,8 +1,6 @@
 import { random } from "../utils";
 import { Module } from "../core/module";
 
-const messages = [];
-
 export class Message extends Module {
   constructor() {
     super("message", "Случайное сообщение");

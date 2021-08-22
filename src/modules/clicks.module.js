@@ -13,7 +13,7 @@ export class ClicksModule extends Module {
     }
     this.createElement();
     const shape = document.querySelector(".click__shape");
-    const timeValue = document.querySelector("#time");
+    const timeValue = document.querySelector(".time");
 
     let score = 0;
     let intervalID = null;
@@ -35,7 +35,7 @@ export class ClicksModule extends Module {
     }
 
     function timer(value) {
-      let timeEl = document.querySelector("#time");
+      let timeEl = document.querySelector(".time");
       if (timeEl === null) {
         clearInterval(intervalID);
       } else {
@@ -81,7 +81,7 @@ export class ClicksModule extends Module {
     timer.className = "timerText";
     timer.textContent = "Осталось ";
     const timerSpan = document.createElement("span");
-    timerSpan.id = "time";
+    timerSpan.className = "time";
     let second1 = random(1, 2);
     let second2 = random(0, 9);
     timerSpan.textContent = `00:${second1}${second2}`;
