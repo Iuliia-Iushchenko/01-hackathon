@@ -11,12 +11,14 @@ export class ClicksModule extends Module {
     if (otherModule) {
       otherModule.remove();
     }
+
     this.createElement();
+
     const shape = document.querySelector(".click__shape");
     const timeValue = document.querySelector(".time");
 
     let score = 0;
-    let intervalID = null;
+    let intervalId = null;
     let time = parseInt(timeValue.getAttribute("data-time"));
     start(time);
 
@@ -30,14 +32,14 @@ export class ClicksModule extends Module {
     }
 
     function start(time) {
-      intervalID = setInterval(decreaseTime, 1000);
+      intervalId = setInterval(decreaseTime, 1000);
       timer(time);
     }
 
     function timer(value) {
       let timeEl = document.querySelector(".time");
       if (timeEl === null) {
-        clearInterval(intervalID);
+        clearInterval(intervalId);
       } else {
         timeEl.innerHTML = `00:${value}`;
       }
@@ -56,7 +58,7 @@ export class ClicksModule extends Module {
     }
 
     function finish(score) {
-      clearInterval(intervalID);
+      clearInterval(intervalId);
       const shape = document.querySelector(".click__shape");
       shape.textContent = `Счет: ${score}`;
       shape.removeEventListener("click", clickCounter);
