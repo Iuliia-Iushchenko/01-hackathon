@@ -6,7 +6,7 @@ import { Sound } from "./modules/sound.module";
 import { ClicksModule } from "./modules/clicks.module";
 import { Dogs } from "./modules/dogs.module";
 import { Message } from "./modules/messages.module";
-import { message } from "statuses";
+import { QuizModule } from './modules/quiz.module'
 
 export class ContextMenu extends Menu {
   open() {
@@ -53,6 +53,9 @@ export class ContextMenu extends Menu {
     const message = new Message();
     menu.insertAdjacentHTML("beforeend", message.toHTML());
 
+    const quizModule = new QuizModule()
+    menu.insertAdjacentHTML('beforeend', quizModule.toHTML())
+,
     // Запуск модуля
 
     menu.addEventListener("click", (e) => {
@@ -64,6 +67,7 @@ export class ContextMenu extends Menu {
       target.dataset.type === "click" ? clicksModule.trigger() : false;
       target.dataset.type === "dogs" ? dogs.trigger() : false;
       target.dataset.type === "message" ? message.trigger() : false;
+      target.dataset.type === 'quiz' ? quizModule.trigger() : false
     });
   }
 }
